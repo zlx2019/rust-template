@@ -1,0 +1,41 @@
+# rust-template
+
+[![Template CI](https://github.com/zlx2019/rust-template/actions/workflows/template-ci.yml/badge.svg)](https://github.com/zlx2019/rust-template/actions/workflows/template-ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Rust](https://img.shields.io/badge/rust-1.96.0%2B-orange.svg)](https://www.rust-lang.org)
+
+一个 [cargo-generate](https://github.com/cargo-generate/cargo-generate) 项目模板，用于快速初始化带有完整工程化配置的 Rust 项目。
+
+## 使用
+
+```bash
+cargo install cargo-generate
+cargo generate zlx2019/rust-template
+```
+
+生成过程中会依次询问：
+
+| 选项 | 说明 |
+|------|------|
+| Github username | 用于生成 README 徽章与 Cargo.toml 仓库链接 |
+| description | 项目简介 |
+| license | 开源许可证（MIT / Apache-2.0 / GPL-3.0），自动生成对应 LICENSE 文件 |
+| 异步运行时 | 可选 Tokio 及其 features |
+| Web 框架 | 可选 axum / actix-web |
+| 常用基础库 | anyhow / uuid / rand / serde_json / chrono / clap / reqwest / tracing |
+
+## 模板内容
+
+- `rust-toolchain.toml` 锁定 Rust 工具链版本
+- Lint 规则预设（`unsafe_code` / `missing_docs` / `unwrap_used` 告警）
+- pre-commit 钩子：fmt / cargo-deny / typos / check / clippy / nextest
+- GitHub Actions：CI（lint / test / deny / typos）与 Release（git-cliff 生成 Changelog）工作流
+- `specs/SPEC.md`：面向 AI 的分层架构与编码规范约束
+
+## 生成后
+
+进入新项目目录，按项目内 README 指引安装开发工具并启用 pre-commit，即可开始开发。
+
+## License
+
+本项目采用 [MIT](./LICENSE) 许可证。

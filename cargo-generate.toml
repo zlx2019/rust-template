@@ -1,0 +1,55 @@
+[template]
+include = [
+  "Cargo.toml",
+  "README-TEMPLATE.md",
+  "licenses/LICENSE-MIT",
+  "licenses/LICENSE-Apache-2.0",
+  "licenses/LICENSE-GPL-3.0",
+  "src/main.rs"
+]
+
+[hooks]
+pre = ["pre-script.rhai"]
+post = ["post-script.rhai"]
+
+[placeholders]
+# Github username
+gh_username = { type = "string", prompt = "What is your Github username?", default = "zlx2019" }
+# Project Description
+description = { type = "string", prompt = "What is the description of this project?", default = "I haven't decided yet."}
+# Open source license
+license = { type = "string", prompt = "Please select the open-source license to use?", choices = ["MIT", "Apache-2.0", "GPL-3.0"], default = "MIT" }
+# Application binary (main.rs) or library (lib.rs)?
+project_type = { type = "string", prompt = "Is this an application or a library?", choices = ["application", "library"], default = "application" }
+
+# Do you need to run asynchronously?
+ask_for_async = { type = "bool", prompt = "Is an asynchronous runtime needed?", default = false }
+# Do you need a web framework?
+ask_for_web = { type = "bool", prompt = "Is it a web application?", default = false }
+
+ask_common_libs = {
+  type = "array",
+  prompt = "Do you need some common crates?",
+  choices = ["anyhow", "uuid", "rand", "serde_json", "chrono", "clap", "reqwest", "tracing"],
+  default = []
+}
+
+
+[conditional.'ask_for_async'.placeholders.multi_choice]
+type = "array"
+prompt = "Choose the features to enable for Tokio"
+choices = ["full", "rt", "rt-multi-thread", "net", "time", "sync", "macros"]
+default = ["full"]
+
+[conditional.'ask_for_web'.placeholders.choice]
+type = "string"
+prompt = "Please select the web framework"
+choices = ["axum", "actix-web"]
+default = "axum"
+
+# Pick the crate root by project type: keep main.rs for an application, lib.rs for a library.
+[conditional.'project_type == "library"']
+ignore = ["src/main.rs"]
+
+[conditional.'project_type == "application"']
+ignore = ["src/lib.rs"]
