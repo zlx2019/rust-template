@@ -76,11 +76,12 @@ rayon = "1"
 
 ### Lint 规则
 [lints.rust]
-unsafe_code = "warn"      # 使用 unsafe 代码时告警（确需时可局部 #[allow]）
+unsafe_code = "warn"      # 使用 unsafe 代码时告警
 missing_docs = "warn"     # 公共项缺少文档注释时告警
 
 [lints.clippy]
-unwrap_used = "warn"      # 使用 unwrap 时告警（测试/原型代码可局部 allow）
+unwrap_used = "warn"      # 使用 unwrap 时告警
+expect_used = "warn"      # 新增 expect 时告警
 
 ### Working directory
 [workspace]
