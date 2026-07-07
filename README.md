@@ -22,7 +22,7 @@ cargo generate zlx2019/rust-template
 | license | 开源许可证（MIT / Apache-2.0 / GPL-3.0），自动生成对应 LICENSE 文件 |
 | 异步运行时 | 可选 Tokio 及其 features |
 | Web 框架 | 可选 axum / actix-web |
-| 常用基础库 | anyhow / uuid / rand / serde_json / chrono / clap / reqwest / tracing |
+| 常用基础库 | anyhow / thiserror / tracing / uuid / rand / serde_json / chrono / clap / reqwest / dashmap / rayon |
 
 ## 模板内容
 

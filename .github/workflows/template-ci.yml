@@ -30,12 +30,12 @@ jobs:
           - scenario: minimal
             args: >-
               -d ask_for_async=false -d ask_for_web=false
-              -d ask_common_libs=anyhow,rand
+              -d ask_common_libs=anyhow,thiserror,rand
           - scenario: async
             args: >-
               -d ask_for_async=true -d multi_choice=rt-multi-thread,macros,time
               -d ask_for_web=false
-              -d ask_common_libs=uuid,serde_json,chrono,tracing
+              -d ask_common_libs=uuid,serde_json,chrono,tracing,dashmap,rayon
           - scenario: web-axum
             args: >-
               -d ask_for_async=false -d ask_for_web=true -d choice=axum

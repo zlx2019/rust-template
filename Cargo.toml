@@ -35,6 +35,9 @@ actix-web = { version = "4" }
 {%- if ask_common_libs contains "anyhow" %}
 anyhow = "1"
 {%- endif %}
+{%- if ask_common_libs contains "thiserror" %}
+thiserror = "2"
+{%- endif %}
 {%- if ask_common_libs contains "uuid" %}
 uuid = { version = "1", features = ["v4"] }
 {%- endif %}
@@ -56,6 +59,12 @@ reqwest = { version = "0.13", features = ["json"] }
 {%- endif %}
 {%- if ask_common_libs contains "tracing" %}
 tracing = "0.1"
+{%- endif %}
+{%- if ask_common_libs contains "dashmap" %}
+dashmap = "6"
+{%- endif %}
+{%- if ask_common_libs contains "rayon" %}
+rayon = "1"
 {%- endif %}
 
 [dev-dependencies]

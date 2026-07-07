@@ -30,7 +30,7 @@ ask_for_web = { type = "bool", prompt = "Is it a web application?", default = fa
 ask_common_libs = {
   type = "array",
   prompt = "Do you need some common crates?",
-  choices = ["anyhow", "uuid", "rand", "serde_json", "chrono", "clap", "reqwest", "tracing"],
+  choices = ["anyhow", "thiserror", "tracing", "uuid", "rand", "serde_json", "chrono", "clap", "reqwest", "dashmap", "rayon"],
   default = []
 }
 
