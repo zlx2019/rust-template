@@ -50,10 +50,6 @@ cargo fmt            # 格式化
 
 提交规范与完整开发流程见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 
-## 项目结构
-
-分层架构与编码约定参见 [specs/SPEC.md](./specs/SPEC.md)。
-
 ## License
 
 本项目采用 [{{license}}](./LICENSE) 许可证。

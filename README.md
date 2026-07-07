@@ -30,7 +30,6 @@ cargo generate zlx2019/rust-template
 - Lint 规则预设（`unsafe_code` / `missing_docs` / `unwrap_used` 告警）
 - pre-commit 钩子：fmt / cargo-deny / typos / check / clippy / nextest
 - GitHub Actions：CI（lint / test / deny / typos）与 Release（git-cliff 生成 Changelog）工作流
-- `specs/SPEC.md`：面向 AI 的分层架构与编码规范约束
 
 ## 生成后
 
