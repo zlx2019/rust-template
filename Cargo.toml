@@ -80,8 +80,11 @@ unsafe_code = "warn"      # 使用 unsafe 代码时告警
 missing_docs = "warn"     # 公共项缺少文档注释时告警
 
 [lints.clippy]
-unwrap_used = "warn"      # 使用 unwrap 时告警
-expect_used = "warn"      # 新增 expect 时告警
+unwrap_used = "warn"
+expect_used = "warn"
+panic = "warn"
+dbg_macro = "warn"
+
 
 ### Working directory
 [workspace]
