@@ -1,15 +1,11 @@
-# 生成项目的 CI。
-# 所有 job 都带有 repository 守卫：模板仓库（zlx2019/rust-template）自身的
-# Cargo.toml 含 {{project-name}} 占位符，cargo 无法解析，因此在模板仓库中
-# 全部跳过（模板仓库由 template-ci.yml 负责检查）。
 name: CI
 
+# When pushing the main branch
 on:
   push:
     branches: [main]
   pull_request:
 
-# 同一分支的并发任务，新提交会取消正在进行的旧任务，节省 CI 资源
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -30,7 +26,6 @@ jobs:
         run: cargo fmt --all -- --check
       - name: cargo clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
-      # 文档构建检查：坏的 intra-doc 链接等 rustdoc 告警直接失败
       - name: cargo doc
         run: cargo doc --no-deps --all-features
         env:

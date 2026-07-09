@@ -27,9 +27,9 @@ cargo generate zlx2019/rust-template
 ## 模板内容
 
 - `rust-toolchain.toml` 锁定 Rust 工具链版本
-- Lint 规则预设（`unsafe_code` / `missing_docs` / `unwrap_used` 告警）
+- Lint 规则预设（`unsafe_code` / `missing_docs` / `unwrap_used` / `expect_used` / `panic` / `dbg_macro` 告警，测试代码豁免）
 - pre-commit 钩子：fmt / cargo-deny / typos / check / clippy / nextest
-- GitHub Actions：CI（lint / test / deny / typos）与 Release（git-cliff 生成 Changelog）工作流
+- GitHub Actions：CI（lint / doc / test / deny / typos）与 Release（git-cliff 生成 Changelog、多平台二进制打包、发布 crates.io）工作流
 
 ## 生成后
 
