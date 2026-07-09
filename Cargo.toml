@@ -59,6 +59,7 @@ reqwest = { version = "0.13", features = ["json"] }
 {%- endif %}
 {%- if ask_common_libs contains "tracing" %}
 tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 {%- endif %}
 {%- if ask_common_libs contains "dashmap" %}
 dashmap = "6"
@@ -92,6 +93,9 @@ members = []
 
 ### Production packaging configuration
 [profile.release]
+lto = "thin"          # 链接时优化，提升运行性能
+codegen-units = 1     # 单编译单元，优化更充分（编译更慢）
+strip = true          # 剥离调试符号，减小二进制体积
 
 ### Debug packaging configuration
 [profile.dev]

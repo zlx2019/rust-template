@@ -17,7 +17,7 @@ env:
 
 jobs:
   # 模板本身的 Cargo.toml 含 {{project-name}} 等占位符，cargo 无法直接解析，
-  # 因此先用 cargo-generate 展开模板，再对生成的项目执行 fmt / clippy / test / deny 检查。
+  # 因此先用 cargo-generate 展开模板，再对生成的项目执行 fmt / clippy / doc / test / deny 检查。
   # 注意：array 类型占位符（ask_common_libs / multi_choice）在 --silent 模式下
   # 不支持默认值（cargo-generate 上游限制），必须显式 -d 传入。
   check:
@@ -27,8 +27,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # minimal 场景同时覆盖 library 分支（保留 lib.rs / 删除 main.rs），
+          # 其余场景使用默认的 application 分支
           - scenario: minimal
             args: >-
+              -d project_type=library
               -d ask_for_async=false -d ask_for_web=false
               -d ask_common_libs=anyhow,thiserror,rand
           - scenario: async
@@ -64,6 +67,12 @@ jobs:
       - name: cargo clippy
         working-directory: ${{ runner.temp }}/ci-smoke
         run: cargo clippy --all-targets --all-features -- -D warnings
+      # 文档构建检查：坏的 intra-doc 链接等 rustdoc 告警直接失败
+      - name: cargo doc
+        working-directory: ${{ runner.temp }}/ci-smoke
+        run: cargo doc --no-deps --all-features
+        env:
+          RUSTDOCFLAGS: -D warnings
       - name: cargo nextest
         working-directory: ${{ runner.temp }}/ci-smoke
         run: cargo nextest run --all-features --no-tests pass
