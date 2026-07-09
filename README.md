@@ -1,40 +1,164 @@
 # rust-template
 
+[简体中文](./README.zh.md)
+
 [![Template CI](https://github.com/zlx2019/rust-template/actions/workflows/template-ci.yml/badge.svg)](https://github.com/zlx2019/rust-template/actions/workflows/template-ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.96.0%2B-orange.svg)](https://www.rust-lang.org)
 
-一个 [cargo-generate](https://github.com/cargo-generate/cargo-generate) 项目模板，用于快速初始化带有完整工程化配置的 Rust 项目。
+A Rust project template for open source projects, powered by [cargo-generate](https://github.com/cargo-generate/cargo-generate). It creates a new Rust project with Rust 2024, CI, release automation, formatting, linting, tests, dependency auditing, spell checking, pre-commit hooks, and a practical starter layout for CLI tools, backend applications, and library crates.
 
-## 使用
+## Features
+
+- Rust 2024 project skeleton with either an `application` or `library` entry point.
+- Optional dependency presets for common crates, including Tokio, axum, actix-web, anyhow, thiserror, tracing, serde_json, clap, and reqwest.
+- Pinned Rust toolchain to reduce version drift across local machines and CI.
+- Strict but practical lint defaults for `unsafe_code`, `missing_docs`, `unwrap_used`, `expect_used`, `panic`, and `dbg_macro`.
+- GitHub Actions workflows for formatting, Clippy, documentation builds, nextest, cargo-deny, and typos.
+- Release workflow for tag-based GitHub Releases, changelog generation, binary packaging for applications, and crates.io publishing.
+- Open source collaboration files, including `CONTRIBUTING.md`, `SECURITY.md`, issue templates, a pull request template, and Dependabot configuration.
+
+## Quick Start
+
+### 1. Install Prerequisites
+
+Install Rust and `cargo-generate`:
 
 ```bash
-cargo install cargo-generate
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install --locked cargo-generate
+```
+
+If Rust is already installed, update the stable toolchain before generating a project:
+
+```bash
+rustup update stable
+```
+
+### 2. Generate A Project
+
+Generate a new project from this GitHub template:
+
+```bash
 cargo generate zlx2019/rust-template
 ```
 
-生成过程中会依次询问：
+You can also provide the project name up front:
 
-| 选项 | 说明 |
-|------|------|
-| Github username | 用于生成 README 徽章与 Cargo.toml 仓库链接 |
-| description | 项目简介 |
-| license | 开源许可证（MIT / Apache-2.0 / GPL-3.0），自动生成对应 LICENSE 文件 |
-| 异步运行时 | 可选 Tokio 及其 features |
-| Web 框架 | 可选 axum / actix-web |
-| 常用基础库 | anyhow / thiserror / tracing / uuid / rand / serde_json / chrono / clap / reqwest / dashmap / rayon |
+```bash
+cargo generate zlx2019/rust-template --name my-app
+```
 
-## 模板内容
+The generator will ask for the following values:
 
-- `rust-toolchain.toml` 锁定 Rust 工具链版本
-- Lint 规则预设（`unsafe_code` / `missing_docs` / `unwrap_used` / `expect_used` / `panic` / `dbg_macro` 告警，测试代码豁免）
-- pre-commit 钩子：fmt / cargo-deny / typos / check / clippy / nextest
-- GitHub Actions：CI（lint / doc / test / deny / typos）与 Release（git-cliff 生成 Changelog、多平台二进制打包、发布 crates.io）工作流
+| Option | Description |
+|--------|-------------|
+| `Github username` | Used for README badges and `Cargo.toml` homepage/repository links |
+| `description` | Project description written to README and `Cargo.toml` |
+| `license` | Open source license, one of `MIT`, `Apache-2.0`, or `GPL-3.0`; the matching `LICENSE` file is generated automatically |
+| `project_type` | Choose `application` or `library`; the template keeps either `src/main.rs` or `src/lib.rs` |
+| `ask_for_async` | Whether to enable the Tokio async runtime |
+| `multi_choice` | Tokio features to enable, such as `full`, `rt-multi-thread`, `macros`, or `time` |
+| `ask_for_web` | Whether to add web application dependencies |
+| `choice` | Web framework choice, either `axum` or `actix-web` |
+| `ask_common_libs` | Common crate choices, such as `anyhow`, `thiserror`, `tracing`, `serde_json`, `clap`, and `reqwest` |
 
-## 生成后
+### 3. Install Project Development Tools
 
-进入新项目目录，按项目内 README 指引安装开发工具并启用 pre-commit，即可开始开发。
+```bash
+cd my-app
+```
+
+The generated project pins its Rust version in `rust-toolchain.toml`. After entering the project directory, `rustup` will install the required toolchain when needed. Install the following tools to match the local workflow with CI:
+
+```bash
+cargo install --locked cargo-deny
+cargo install --locked cargo-nextest
+cargo install --locked typos-cli
+cargo install --locked git-cliff
+pip install pre-commit
+```
+
+Tool usage:
+
+| Tool | Purpose |
+|------|---------|
+| `cargo-deny` | Checks dependency advisories, licenses, and duplicate dependencies |
+| `cargo-nextest` | Runs Rust tests faster and with better reporting |
+| `typos` | Checks spelling in code and documentation |
+| `git-cliff` | Generates changelogs from Conventional Commits |
+| `pre-commit` | Runs formatting, linting, tests, and audits before commits |
+
+### 4. Enable Pre-Commit Checks
+
+```bash
+pre-commit install
+```
+
+After installation, each `git commit` runs the checks configured in `.pre-commit-config.yaml`. You can also run them against the whole repository manually:
+
+```bash
+pre-commit run --all-files
+```
+
+### 5. Build, Run, And Test
+
+For application projects:
+
+```bash
+cargo run
+```
+
+For library projects:
+
+```bash
+cargo test
+```
+
+Before submitting changes, run the full local check set:
+
+```bash
+cargo fmt --all -- --check
+cargo clippy --all-targets --all-features -- -D warnings
+cargo nextest run --all-features --no-tests pass
+cargo deny check
+typos
+```
+
+## Generated Project Layout
+
+```text
+.
+├── .github/                 # CI, release, issue, and pull request templates
+├── examples/                # Runnable examples
+├── fixtures/                # Test data
+├── src/                     # Rust source entry point
+├── tests/                   # Integration tests
+├── Cargo.toml               # Package metadata, dependencies, lints, and profile config
+├── README.md                # README for the generated project
+├── CONTRIBUTING.md          # Contribution guide
+├── SECURITY.md              # Security policy
+├── deny.toml                # cargo-deny configuration
+├── rust-toolchain.toml      # Pinned Rust toolchain
+└── .pre-commit-config.yaml  # Local pre-commit checks
+```
+
+## Maintaining This Template
+
+This repository is itself a template. `Cargo.toml` and some files contain Liquid placeholders, so the repository cannot be built directly as a normal Rust crate. Template CI first expands the template with `cargo generate --path .`, then runs formatting, Clippy, documentation, tests, dependency auditing, and spell checking against the generated project.
+
+To validate the template locally:
+
+```bash
+cargo generate --path . --name smoke-test --destination /tmp
+cd /tmp/smoke-test
+cargo fmt --all -- --check
+cargo clippy --all-targets --all-features -- -D warnings
+cargo nextest run --all-features --no-tests pass
+cargo deny check
+typos
+```
 
 ## License
 
-本项目采用 [MIT](./LICENSE) 许可证。
+This project is licensed under [MIT](./LICENSE).

@@ -5,6 +5,6 @@
 /.vscode/
 /.idea/
 /README.md
+/README.zh.md
 /LICENSE
 /.github/workflows/template-ci.yml
-
