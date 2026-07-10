@@ -11,6 +11,8 @@ repository = "https://github.com/{{gh_username}}/{{project-name}}"
 readme = "README.md"
 license = "{{license}}"
 keywords = []
+categories = []
+exclude = [".github/", "fixtures/", ".pre-commit-config.yaml", "_typos.toml", "cliff.toml"]
 
 [dependencies]
 {%- if ask_for_async -%}
@@ -20,7 +22,6 @@ tokio = { version = "1", features = ["full"] }
 tokio = { version = "1", features = [{%- for feature in multi_choice -%} "{{feature}}"{% unless forloop.last %}, {%endunless -%} {%- endfor -%} ] }
   {%- endif %}
 {%- elsif ask_for_web %}
-# Web 框架需要异步运行时
 tokio = { version = "1", features = ["full"] }
 {%- endif %}
 
