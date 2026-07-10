@@ -1,6 +1,5 @@
 [template]
-# array 类型占位符（ask_common_libs 等）需要 cargo-generate 0.19+，
-# 版本过低时直接给出清晰报错而不是渲染失败
+# cargo-generate minimum version
 cargo_generate_version = ">=0.19.0"
 include = [
   "Cargo.toml",
@@ -30,6 +29,7 @@ ask_for_async = { type = "bool", prompt = "Is an asynchronous runtime needed?", 
 # Do you need a web framework?
 ask_for_web = { type = "bool", prompt = "Is it a web application?", default = false }
 
+# Some commonly used basic libraries
 ask_common_libs = {
   type = "array",
   prompt = "Do you need some common crates?",
