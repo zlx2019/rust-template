@@ -1,7 +1,7 @@
-# 统一不同编辑器的代码风格 https://editorconfig.org
 root = true
 
-# 默认规则：UTF-8 编码、LF 换行、末尾保留空行、裁剪行尾空格、4 空格缩进
+# Default rules: UTF-8 encoding, LF line endings, preserve trailing blank lines
+# trim trailing whitespace, 4-space indentation.
 [*]
 charset = utf-8
 end_of_line = lf
@@ -10,10 +10,8 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 4
 
-# 配置类文件使用 2 空格缩进
 [*.{toml,yml,yaml,json}]
 indent_size = 2
 
-# Markdown 行尾空格有语义（表示换行），不裁剪
 [*.md]
 trim_trailing_whitespace = false

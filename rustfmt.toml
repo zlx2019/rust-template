@@ -1,29 +1,30 @@
-# 单行代码最大宽度
+# Maximum line width.
 max_width = 100
-# 换行符使用 LF(\n)
+# Use LF (\n) line endings.
 newline_style = "Unix"
-# 字段名相同时简写
+# Use field initialization shorthand when names match.
 use_field_init_shorthand = true
-# try! > ?
+# Use ? instead of try!.
 use_try_shorthand = true
 
-# 缩进是否使用tab
+# Use spaces instead of tabs for indentation.
 hard_tabs = false
-# 缩进宽度
+# Number of spaces per indentation level.
 tab_spaces = 4
-# 如果有多个 #[derive] 则合并成一个
+# Merge multiple #[derive] attributes.
 merge_derives = true
-# 删除多余的嵌套括号
+# Remove unnecessary nested parentheses.
 remove_nested_parens = true
 
-# 按 2024 edition 解析代码。cargo fmt 会从 Cargo.toml 读取，
-# 但编辑器（如 rust-analyzer 的 format-on-save）直接调用 rustfmt 时默认按 2015 解析，
-# 显式声明可避免两者行为不一致
+# Parse source code using the 2024 edition. Cargo reads this from Cargo.toml,
+# but editors such as rust-analyzer may invoke rustfmt directly with the 2015
+# edition by default. Declaring it here keeps both behaviors consistent.
 edition = "2024"
-# 锁定格式化规则版本（2024 风格），防止 rustfmt 升级引入新默认风格导致全仓库 diff
+# Pin the 2024 formatting style to prevent toolchain upgrades from introducing
+# repository-wide changes through new default formatting rules.
 style_edition = "2024"
 
-# use 语句按字母序排序
+# Sort use declarations alphabetically.
 reorder_imports = true
-# mod 声明按字母序排序
+# Sort module declarations alphabetically.
 reorder_modules = true

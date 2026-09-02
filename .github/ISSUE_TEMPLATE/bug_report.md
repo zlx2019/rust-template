@@ -1,30 +1,30 @@
 ---
-name: Bug 报告
-about: 报告一个缺陷以帮助我们改进
+name: Bug Report
+about: Report a bug to help us improve
 title: "[Bug] "
 labels: bug
 ---
 
-## 问题描述
+## Problem Description
 
-<!-- 清晰简洁地描述这个 Bug -->
+<!-- Clearly and concisely describe the bug -->
 
-## 复现步骤
+## Steps to Reproduce
 
 1.
 2.
 3.
 
-## 期望行为
+## Expected Behavior
 
-<!-- 描述你期望发生什么 -->
+<!-- Describe what you expected to happen -->
 
-## 环境信息
+## Environment Information
 
 - OS:
-- Rust 版本:
-- 项目版本 / commit:
+- Rust version:
+- Project version / commit:
 
-## 补充信息
+## Additional Information
 
-<!-- 日志、截图等其他有助于定位问题的信息 -->
+<!-- Logs, screenshots, or other information helpful for locating the issue -->

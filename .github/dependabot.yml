@@ -1,6 +1,6 @@
 version: 2
 updates:
-  # Rust 依赖（Cargo）
+  # Rust
   - package-ecosystem: cargo
     directory: /
     schedule:

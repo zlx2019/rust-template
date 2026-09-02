@@ -1,32 +1,31 @@
-# typos 用于检查代码和文档中的英文单词拼写错误。
+# typos checks English spelling in source code and documentation.
 
 
 [files]
-# 忽略不需要检测的文件
+# Files and paths excluded from spell checking.
 extend-exclude = ["CHANGELOG.md"]
-ignore-hidden = true  # 忽略隐藏文件
-ignore-vcs = true     # 忽略 .gitignore 中的文件
-ignore-dot = true     # 忽略 .ignore 中的文件
+ignore-hidden = true  # Ignore hidden files.
+ignore-vcs = true     # Ignore files excluded by VCS ignore rules.
+ignore-dot = true     # Ignore files excluded by .ignore files.
 
-# 检查行为
+# Spell-checking behavior.
 [default]
-check-filename = true # 是否检查文件名
-check-file = true     # 是否检查文件内容
+check-filename = true # Check file names.
+check-file = true     # Check file contents.
 locale = "en"
-binary = false        # 是否检查二进制文件
-unicode = true        # 是否支持 Unicode 标识符
-# 按正则忽略内容（可实现行内 disable 注释）
+binary = false        # Whether to check binary files.
+unicode = true        # Support Unicode identifiers.
+# Regular expressions for ignored content, including inline disable comments.
 extend-ignore-re = [
     "(?Rm)^.*(#|//)\\s*spellchecker:disable-line$",
     "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on",
 ]
-extend-ignore-identifiers-re = []    # 按正则忽略标识符
-extend-ignore-words-re = []          # 按正则忽略单词
+extend-ignore-identifiers-re = []    # Regular expressions for ignored identifiers.
+extend-ignore-words-re = []          # Regular expressions for ignored words.
 
 [default.extend-words]
-# 常见但拼写检查器容易误报的开发工具名、库名、协议名和缩写。
+# Common development tools, libraries, protocols, and abbreviations that may be false positives.
 
-# Rust 工具链与生态
 actix = "actix"
 anyhow = "anyhow"
 axum = "axum"
@@ -61,7 +60,6 @@ wasm = "wasm"
 wgpu = "wgpu"
 winit = "winit"
 
-# 后端、协议与消息中间件
 amqp = "amqp"
 avro = "avro"
 bson = "bson"
@@ -83,7 +81,6 @@ webhook = "webhook"
 websocket = "websocket"
 websockets = "websockets"
 
-# 系统编程、可观测性与基础设施
 ebpf = "ebpf"
 epoll = "epoll"
 grafana = "grafana"
