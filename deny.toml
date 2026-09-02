@@ -19,6 +19,15 @@ yanked = "deny"
 # Advisories to silence. Prefer upgrading the dependency over adding an entry,
 # and always record why.
 ignore = [
+{%- if ask_for_web %}
+  {%- if choice == "actix-web" %}
+  # actix-http 3.x requires h2 ^0.3, while the fix landed in h2 0.4.16, so there
+  # is no upgrade path until actix migrates. Low severity: empty DATA frames are
+  # queued without limit, which can grow memory if streams are never drained.
+  # Drop this entry once actix-http moves to h2 0.4.
+  { id = "RUSTSEC-2026-0258", reason = "actix-http 3.x pins h2 0.3; no upstream fix available yet" },
+  {%- endif %}
+{%- endif %}
   # { id = "RUSTSEC-0000-0000", reason = "why this is acceptable here" },
 ]
 
